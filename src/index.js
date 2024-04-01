@@ -1,12 +1,35 @@
 import dotenv from 'dotenv'
 import connectDB from './db/index.js'
+import app from './app.js'
 
 dotenv.config({
     path: './env'
 })
 
-connectDB()
 
+// Here, two errors are being handled
+// The error in catch is the error that has been occured 
+// during execution of connectDB function
+// The error in app.on is the error in the express app itself
+
+connectDB()
+.then(() => {
+
+    // app.on() attaches an event handler on express app.
+    // This one handles the "error" event
+    app.on("error", (error) => {
+        console.log(`Error: ${error}`);
+        throw error
+    })
+
+    app.listen(process.env.PORT || 8000, () => {
+        console.log(`App running on the Port: ${process.env.PORT}`);
+    } )
+
+})
+.catch((error) => {
+    console.log(`MONODB connected failed: ${error}`);
+})
 /*
 
 // This is our first approach. The problem with this is
