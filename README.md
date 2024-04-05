@@ -6,4 +6,5 @@ In this project, we will create the backend for a social media app which would b
 - Setup the folder structure of the project
 - Connected the database with MERN(MongoDB is used)
 - Added error handling class and api response class
+- Added user model and video model with hooks and jwt
 
